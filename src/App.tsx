@@ -11,8 +11,10 @@ import {
     MessageType } 
 from '@privacyresearch/libsignal-protocol-typescript'
 
+
 import './App.css'
 import { Paper, Grid, Avatar, Typography, Button,  Chip, TextField } from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send';
 
 import {SignalProtocolStore} from './storage-type'
 import { SignalDirectory } from './signal-directory'
@@ -42,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'lightsteelblue',
         margin: 10,
         maxWidth: '90%',
+        textAlign: 'left',
     },
     outgoingmessage: {
         padding: 10,
@@ -78,8 +81,8 @@ function getNewMessageID(): number {
 
 // define addresses
 
-const adolfAddress = new SignalProtocolAddress('adolf', 1)
-const borisAddress = new SignalProtocolAddress('boris', 1)
+const adolfAddress = new SignalProtocolAddress('adalheid', 1)
+const borisAddress = new SignalProtocolAddress('brünhild', 1)
 
 function App() {
     const [adiStore] = useState(new SignalProtocolStore())
@@ -112,9 +115,9 @@ function App() {
         }
 
         const getReceivingSessionCipherForRecipient = (to: string) => {
-            // send from Boris to adolf so use his store
-            const store = to === 'boris' ? borisStore : adiStore
-            const address = to === 'boris' ? adolfAddress : borisAddress
+            // send from Brünhild to Adalheid so use his store
+            const store = to === 'brünhild' ? borisStore : adiStore
+            const address = to === 'brünhild' ? adolfAddress : borisAddress
             return new SessionCipher(store, address)
         }
 
@@ -198,21 +201,21 @@ function App() {
     }
 
     const createAdolfIdentity = async () => {
-        await createID('adolf', adiStore)
+        await createID('adalheid', adiStore)
         console.log({adiStore})
         setAHasIdentity(true)
     }
 
     const createBorisIdentity = async () => {
-        await createID('boris', borisStore)
+        await createID('brünhild', borisStore)
         setBHasIdentity(true)
     }
 
     const starterMessageBytes = Uint8Array.from([0xce, 0x93, 0xce, 0xb5, 0xce, 0xb9, 0xce, 0xac, 0x20, 0xcf, 0x83, 0xce, 0xbf, 0xcf, 0x85])
 
     const startSessionWithBoris = async () => {
-        // get Boris' key bundle
-        const borisBundle = directory.getPreKeyBundle('boris')
+        // get Brünhild' key bundle
+        const borisBundle = directory.getPreKeyBundle('brünhild')
         console.log({borisBundle})
 
         const recipientAddress = borisAddress
@@ -223,20 +226,20 @@ function App() {
         // Process a prekey fetched from the server. Returns a promise that resolves
         // once a session is created and saved in the store, or rejects if the
         // identityKey differs from a previously seen identity for this address.
-        console.log('adolf processing prekey')
+        console.log('adalheid processing prekey')
         await sessionBuilder.processPreKey(borisBundle!)
 
         // Now we can send an encrypted message
         const adolfSessionCipher = new SessionCipher(adiStore, recipientAddress)
         const ciphertext = await adolfSessionCipher.encrypt(starterMessageBytes.buffer)
 
-        sendMessage('boris', 'adolf', ciphertext)
+        sendMessage('brünhild', 'adalheid', ciphertext)
     
     }
 
     const startSessionWithAdolf = async () => {
-        // get Adolf's key bundle
-        const adolfBundle = directory.getPreKeyBundle('adolf')
+        // get Adalheid's key bundle
+        const adolfBundle = directory.getPreKeyBundle('adalheid')
         console.log({adolfBundle})
 
         const recipientAddress = adolfAddress
@@ -247,14 +250,14 @@ function App() {
         // Process a prekey fetched from the server. Returns a promise that resolves
         // once a session is created and saved in the store, or rejects if the
         // identityKey differs from a previously seen identity for this address.
-        console.log('boris processing prekey')
+        console.log('brünhild processing prekey')
         await sessionBuilder.processPreKey(adolfBundle!)
 
         // Now we can send an encrypted message
         const borisSessionCipher = new SessionCipher(borisStore, recipientAddress)
         const ciphertext = await borisSessionCipher.encrypt(starterMessageBytes.buffer)
 
-        sendMessage('adolf', 'boris', ciphertext)
+        sendMessage('adalheid', 'brünhild', ciphertext)
     
     }
 
@@ -274,17 +277,17 @@ function App() {
     }
 
     const getSessionCipherForRecipient = (to: string) => {
-        // send from Boris to adolf so use his store
-        const store = to === 'adolf' ? borisStore : adiStore
-        const address = to === 'adolf' ? adolfAddress : borisAddress
+        // send from Brünhild to adalheid so use his store
+        const store = to === 'adalheid' ? borisStore : adiStore
+        const address = to === 'adalheid' ? adolfAddress : borisAddress
         return new SessionCipher(store, address)
     }
 
     const encryptAndSendMessage = async (to: string, message: string) => {
         const cipher = getSessionCipherForRecipient(to)
-        const from = to === 'adolf' ? 'boris' : 'adolf'
+        const from = to === 'adalheid' ? 'brünhild' : 'adalheid'
         const ciphertext = await cipher.encrypt(new TextEncoder().encode(message).buffer)
-        if(from === 'adolf') {
+        if(from === 'adalheid') {
             setAdolfTyping('')
         } else {
             setBorisTyping('')
@@ -293,8 +296,8 @@ function App() {
     }
 
     const sendMessageControl = (to: string) => {
-        const value = to === 'adolf' ? borisTyping: adolfTyping
-        const onTextChange = to === 'adolf' ? setBorisTyping: setAdolfTyping
+        const value = to === 'adalheid' ? borisTyping: adolfTyping
+        const onTextChange = to === 'adalheid' ? setBorisTyping: setAdolfTyping
         return <Grid item xs={12} key='input'>
             <Paper className={classes.paper}>
                 <TextField
@@ -305,7 +308,7 @@ function App() {
                     onChange={(event) => {onTextChange(event.target.value)}}
                     variant="outlined">
                 </TextField>
-                <Button onClick={() => encryptAndSendMessage(to, value)}>Send</Button>
+                <Button onClick={() => encryptAndSendMessage(to, value)} variant='contained' className={classes.buttonitem}> <SendIcon/></Button>
             </Paper>
         </Grid>
     }
@@ -317,45 +320,60 @@ function App() {
                     <Grid item xs={4}>
                     <Paper className={classes.paper}>
                         <Grid container>
-                            <Grid item xs={4}>
+                            <Grid item xs={9}>
+                                <Typography variant="h5" style={{textAlign:'right', verticalAlign:'top'}} gutterBottom >Adalheid's View</Typography>
+                            </Grid>
+                            <Grid item xs={1}></Grid>
+                            <Grid item xs={2}>
                                 <Avatar>A</Avatar>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12}>
                                 {aHasIdentity ? 
                                 <React.Fragment>
-                                    <Chip label={`Adolf Registration ID: ${ adiStore.get('registrationID', '') }`}></Chip>
-                                    {hasSession ? <div /> : <Button className={classes.buttonitem} variant='contained' onClick={startSessionWithBoris}>Start session with Boris</Button>}
+                                    <Chip label={`Adalheid Registration ID: ${ adiStore.get('registrationID', '') }`}></Chip>
+                                    {hasSession || !(aHasIdentity && bHasIdentity) 
+                                        ? <div /> 
+                                        : <Button className={classes.buttonitem} variant='contained' onClick={startSessionWithBoris}>
+                                            Start session with Brünhild
+                                          </Button>}
                                 </React.Fragment>
-                                : <Button className={classes.buttonitem} variant='contained' onClick={createAdolfIdentity}>Create an identity for Adolf</Button>}
+                                : <Button className={classes.buttonitem} variant='contained' onClick={createAdolfIdentity}>Create an identity for Adalheid</Button>}
                             </Grid>
-                             {hasSession ? sendMessageControl('boris'): <div/>}
-                            {displayMessages('boris')}
+                             {hasSession ? sendMessageControl('brünhild'): <div/>}
+                            {displayMessages('adalheid')}
                         </Grid>
                     </Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper  className={classes.paper}>
                             <Typography variant="h3" component="h3" gutterBottom>
-                                Adolf talks to Boris
+                                Adalheid talks to Brünhild
                             </Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper  className={classes.paper}>
                         <Grid container>
-                            <Grid item xs={4}>
+                            <Grid item xs={2}>
                                 <Avatar>B</Avatar>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={10}>
+                                <Typography variant="h5" style={{textAlign:'left', verticalAlign:'top'}} gutterBottom >Brünhild's View</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
                                 {bHasIdentity ? 
                                 <React.Fragment>
-                                    <Chip label={`Boris Registration ID: ${ borisStore.get('registrationID', '') }`}></Chip>
-                                    {hasSession ? <div /> : <Button className={classes.buttonitem} variant='contained' onClick={startSessionWithAdolf}>Start session with Adolf</Button>}
+                                    <Chip label={`Brünhild's Registration ID: ${ borisStore.get('registrationID', '') }`}></Chip>
+                                    {hasSession || !(aHasIdentity && bHasIdentity)
+                                        ? <div /> 
+                                        : <Button className={classes.buttonitem} variant='contained' onClick={startSessionWithAdolf}>
+                                            Start session with Adalheid
+                                          </Button>}
                                 </React.Fragment>
-                                : <Button variant='contained' onClick={createBorisIdentity}>Create an identity for Boris</Button>}
+                                : <Button variant='contained' onClick={createBorisIdentity}>Create an identity for Brünhild</Button>}
                              </Grid>
-                             {hasSession ? sendMessageControl('adolf') : <div/>}
-                            {displayMessages('adolf')}
+                             {hasSession ? sendMessageControl('adalheid') : <div/>}
+                            {displayMessages('brünhild')}
                          </Grid>
                         </Paper>
                     </Grid>
