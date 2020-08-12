@@ -27,12 +27,14 @@ import SendIcon from "@material-ui/icons/Send";
 
 import { SignalProtocolStore } from "./storage-type";
 import { SignalDirectory } from "./signal-directory";
+import CodeBlock from "./code-block";
 
 const initialStory =
   "# Start using the demo to see what is happening in the code";
 const createidMD = require("./createid.md");
 const startSessionWithAMD = require("./start-session-with-a.md");
 const startSessionWithBMD = require("./start-session-with-b.md");
+const sendMessageMD = require("./send-message.md");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -359,6 +361,7 @@ function App() {
       setBrunhildeTyping("");
     }
     sendMessage(to, from, ciphertext);
+    updateStory(sendMessageMD);
   };
 
   const sendMessageControl = (to: string) => {
@@ -452,7 +455,11 @@ function App() {
               <Typography variant="h3" component="h3" gutterBottom>
                 Adalheid talks to Brünhild
               </Typography>
-              <ReactMarkdown source={story} className={classes.story} />
+              <ReactMarkdown
+                source={story}
+                className={classes.story}
+                renderers={{ code: CodeBlock }}
+              />
             </Paper>
           </Grid>
           <Grid item xs={3}>

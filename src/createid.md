@@ -2,7 +2,7 @@ Here's what happens.
 
 First, we use `KeyHelper` to generate a registration ID and store it
 
-```typescript
+```ts
 const registrationId = KeyHelper.generateRegistrationId();
 // Store registrationId somewhere durable and safe... Or do this.
 storeSomewhereSafe(store)(`registrationID`, registrationId);
@@ -11,7 +11,7 @@ storeSomewhereSafe(store)(`registrationID`, registrationId);
 Then when use `KeyHelper` to generate an identity key pair. In a real appliocation,
 the private key in this pair must be stored safely.
 
-```typescript
+```ts
 const identityKeyPair = await KeyHelper.generateIdentityKeyPair();
 // Store identityKeyPair somewhere durable and safe... Or do this.
 storeSomewhereSafe(store)("identityKey", identityKeyPair);
@@ -19,7 +19,7 @@ storeSomewhereSafe(store)("identityKey", identityKeyPair);
 
 Now we generate a one-time use prekey and a signed pre-key, storing both locally
 
-```typescript
+```ts
 const baseKeyId = Math.floor(10000 * Math.random());
 const preKey = await KeyHelper.generatePreKey(baseKeyId);
 store.storePreKey(`${baseKeyId}`, preKey.keyPair);
@@ -34,7 +34,7 @@ store.storeSignedPreKey(signedPreKeyId, signedPreKey.keyPair);
 
 Finally we store the associated public keys and signatures in a directory so other users can find them.
 
-```typescript
+```ts
 const publicSignedPreKey: SignedPublicPreKeyType = {
   keyId: signedPreKeyId,
   publicKey: signedPreKey.keyPair.pubKey,
