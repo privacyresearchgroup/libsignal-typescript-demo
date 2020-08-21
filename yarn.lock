@@ -1404,30 +1404,26 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@privacyresearch/curve25519-typescript@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@privacyresearch/curve25519-typescript/-/curve25519-typescript-0.0.6.tgz#e6f0e80eb54a7e6bb65e1e7ff512769b1a58536b"
-  integrity sha512-9ff+xUCkAKzqM7Mev4On8MLqB33wHzStD483C7fCtmktwhh3Taks2er7cuxpmXzlMbUa1BafgDRC4t52wrne+A==
+"@privacyresearch/curve25519-typescript@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@privacyresearch/curve25519-typescript/-/curve25519-typescript-0.0.7.tgz#a028dea902af531997cfe331c58cccdefda977b3"
+  integrity sha512-9MyIq/pLsKYESHsY6yNE3g0o6AAaetzh+XOAumdU/CU0QNpDfG+0ciM5A7pEawWyas30/iUxKv0gLBnYVy2DWw==
 
-"@privacyresearch/libsignal-protocol-protobuf-ts@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@privacyresearch/libsignal-protocol-protobuf-ts/-/libsignal-protocol-protobuf-ts-0.0.5.tgz#94c2c959b1fbb0a1659f44a477dcc8edf8847ea4"
-  integrity sha512-GNiIRwaos+J1UvRN8DgkNWR1aL4rQ3onfXfQrFvTcYvAfUOY0X8myRJIlBTHXnRNsufEheJpfsFjkKCtNT+Yxw==
+"@privacyresearch/libsignal-protocol-protobuf-ts@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@privacyresearch/libsignal-protocol-protobuf-ts/-/libsignal-protocol-protobuf-ts-0.0.7.tgz#88dea9a415e3acb39218a1a1bc6886c8c96d6ae9"
+  integrity sha512-DyVC8p19WuGYKIYmBKblPK4iZCcva/TbM89deOsZ5vtOf48XnnkHQuChhVApw4ZkawyIhAHWXCe4QYS+7ruHoQ==
   dependencies:
     ts-proto "^1.26.0"
 
-"@privacyresearch/libsignal-protocol-typescript@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@privacyresearch/libsignal-protocol-typescript/-/libsignal-protocol-typescript-0.0.5.tgz#aa59cee3b9ed11e3bd78531d3d70402efb400a32"
-  integrity sha512-CBSUG255hfo3gZnCd1rGaWE1CQQdsqVRves+wF6ZPGxPLR3h5qxVZWLE97Sa8gJO1nWXW2WSKJWn4d3FqsBavA==
+"@privacyresearch/libsignal-protocol-typescript@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@privacyresearch/libsignal-protocol-typescript/-/libsignal-protocol-typescript-0.0.8.tgz#ee8a6ea5e04fd7f926518c2bed44209f2b031ef1"
+  integrity sha512-mSt9AVdP+yJFa0aZFtFbIZi+TxwvoIg0qNlPSJHIJyUcI9H9f+CWm2uxLdy+7wHEZPBJHf10ZVXUwbmsNCoNRQ==
   dependencies:
-    "@privacyresearch/curve25519-typescript" "^0.0.6"
-    "@privacyresearch/libsignal-protocol-protobuf-ts" "^0.0.5"
-    "@types/bytebuffer" "^5.0.41"
-    "@types/long" "^4.0.1"
+    "@privacyresearch/curve25519-typescript" "^0.0.7"
+    "@privacyresearch/libsignal-protocol-protobuf-ts" "^0.0.7"
     base64-js "^1.3.1"
-    bytebuffer "^5.0.1"
-    long "^4.0.0"
     msrcrypto "^1.5.8"
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
@@ -1682,14 +1678,6 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/bytebuffer@^5.0.41":
-  version "5.0.41"
-  resolved "https://registry.yarnpkg.com/@types/bytebuffer/-/bytebuffer-5.0.41.tgz#6850dba4d4cd2846596b4842874d5bfc01cd3db1"
-  integrity sha512-Mdrv4YcaHvpkx25ksqqFaezktx3yZRcd51GZY0rY/9avyaqZdiT/GiWRhfrJhMpgzXqTOSHgGvsumGxJFNiZZA==
-  dependencies:
-    "@types/long" "*"
-    "@types/node" "*"
-
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -1740,7 +1728,7 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
   integrity sha512-7+2BITlgjgDhH0vvwZU/HZJVyk+2XUlvxXe8dFMedNX/aMkaOq++rMAFXc0tM7ij15QaWlbdQASBR9dihi+bDQ==
 
-"@types/long@*", "@types/long@^4.0.1":
+"@types/long@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz#459c65fa1867dafe6a8f322c4c51695663cc55e9"
   integrity sha512-5tXH6Bx/kNGd3MgffdmP4dy2Z+G4eaXw0SE81Tq3BNadtnMR5/ySMzX4SLEzHJzSmPNn4HIdpQsBvXMUykr58w==
@@ -2863,13 +2851,6 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
-
-bytebuffer@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/bytebuffer/-/bytebuffer-5.0.1.tgz#582eea4b1a873b6d020a48d58df85f0bba6cfddd"
-  integrity sha1-WC7qSxqHO20CCkjVjfhfC7ps/d0=
-  dependencies:
-    long "~3"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -7036,11 +7017,6 @@ long@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
   integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
-
-long@~3:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/long/-/long-3.2.0.tgz#d821b7138ca1cb581c172990ef14db200b5c474b"
-  integrity sha1-2CG3E4yhy1gcFymQ7xTbIAtcR0s=
 
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
