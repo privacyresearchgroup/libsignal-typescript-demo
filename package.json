@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@privacyresearch/libsignal-protocol-typescript": "^0.0.8",
+    "@privacyresearch/libsignal-protocol-typescript": "^0.0.12",
     "highlight.js": "^10.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
