@@ -2,7 +2,7 @@ const React = require("react");
 const PropTypes = require("prop-types");
 const hljs = require("highlight.js");
 
-class CodeBlock extends React.PureComponent {
+export default class CodeBlock extends React.PureComponent {
   constructor(props) {
     super(props);
     this.setRef = this.setRef.bind(this);
