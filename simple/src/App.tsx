@@ -31,10 +31,10 @@ import CodeBlock from "./code-block";
 
 const initialStory =
   "# Start using the demo to see what is happening in the code";
-const createidMD = require("./createid.md");
-const startSessionWithAMD = require("./start-session-with-a.md");
-const startSessionWithBMD = require("./start-session-with-b.md");
-const sendMessageMD = require("./send-message.md");
+const createidMD = "createid.md";
+const startSessionWithAMD = "start-session-with-a.md";
+const startSessionWithBMD = "start-session-with-b.md";
+const sendMessageMD = "send-message.md";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,6 +127,7 @@ function App() {
 
   const [processing, setProcessing] = useState(false);
   const [story, setStory] = useState(initialStory);
+
 
   const classes = useStyles();
 
@@ -456,10 +457,11 @@ function App() {
                 Adalheid talks to Brünhild
               </Typography>
               <ReactMarkdown
-                source={story}
+                children={story}
                 className={classes.story}
-                renderers={{ code: CodeBlock }}
-              />
+                // @ts-ignore
+                components={ CodeBlock }
+              ></ReactMarkdown>
             </Paper>
           </Grid>
           <Grid item xs={3}>
