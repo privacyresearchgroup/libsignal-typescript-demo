@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import useStyles from '../../styles'
 
 import { createIdentity } from '../functions'
 
@@ -9,16 +8,14 @@ export default function CreateIdentity(): JSX.Element {
     const [wss, setWss] = useState('wss://56f7nk7zkg.execute-api.us-west-2.amazonaws.com/temp')
     const [apiKey, setApiKey] = useState('y3Qugm4ahC19oBjKObTYO2oSDNB5jcAE1QrzFRzz')
 
-    const classes = useStyles()
-
     const createID = async () => {
         await createIdentity(username, url, wss, apiKey)
     }
 
     return (
-        <div className={classes.inputset}>
-            <div className={classes.inputitem}>
-                <label htmlFor="username" className={classes.label}>
+        <div className="inputset">
+            <div className="inputitem">
+                <label htmlFor="username" className="label">
                     Username:
                 </label>
                 <input
@@ -31,8 +28,8 @@ export default function CreateIdentity(): JSX.Element {
                     }}
                 />
             </div>
-            <div className={classes.inputitem}>
-                <label htmlFor="url" className={classes.label}>
+            <div className="inputitem">
+                <label htmlFor="url" className="label">
                     REST API URL:
                 </label>
                 <input
@@ -45,8 +42,8 @@ export default function CreateIdentity(): JSX.Element {
                     }}
                 />
             </div>
-            <div className={classes.inputitem}>
-                <label htmlFor="wss" className={classes.label}>
+            <div className="inputitem">
+                <label htmlFor="wss" className="label">
                     Websocket URI:
                 </label>
                 <input
@@ -59,8 +56,8 @@ export default function CreateIdentity(): JSX.Element {
                     }}
                 />
             </div>
-            <div className={classes.inputitem}>
-                <label htmlFor="apikey" className={classes.label}>
+            <div className="inputitem">
+                <label htmlFor="apikey" className="label">
                     API Key:
                 </label>
                 <input
@@ -74,7 +71,7 @@ export default function CreateIdentity(): JSX.Element {
                 />
             </div>
             <div>
-                <button onClick={createID} className={classes.buttonitem}>
+                <button onClick={createID} className="buttonitem">
                     Create Identity
                 </button>
             </div>

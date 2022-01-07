@@ -15,12 +15,15 @@ export default function AddSession(): JSX.Element {
             <h2 id="add-session-title">Create a new chat session</h2>
             <p id="add-session-description">Look up a user by username and start and end-to-end-encrypted chat</p>
             <input
+                className="inputitem"
                 value={remoteUsername}
                 onChange={(event) => {
                     setRemoteUsername(event.target.value)
                 }}
             ></input>
-            <button onClick={createSession}>Start Session</button>
+            <button onClick={createSession} className="buttonitem">
+                Start Session
+            </button>
         </div>
     )
 }

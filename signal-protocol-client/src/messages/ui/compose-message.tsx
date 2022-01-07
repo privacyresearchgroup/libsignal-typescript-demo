@@ -9,7 +9,6 @@ export interface ComposeMessageProps {
 export default function ComposeMessage(props: ComposeMessageProps): JSX.Element {
     const [message, setMessage] = useState('')
 
-
     const sendMessage = async (to: string, message: string) => {
         encryptAndSendMessage(to, message)
         setMessage('')

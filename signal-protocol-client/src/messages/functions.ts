@@ -4,9 +4,9 @@ import { signalStore, usernameSubject } from '@app/identity/state'
 import { addMessageToSession } from '@app/sessions/functions'
 import { sessionForRemoteUser, sessionListSubject } from '@app/sessions/state'
 import { ChatSession } from '@app/sessions/types'
-import { ProcessedChatMessage } from '@app/types/messages'
 import { MessageType, SessionCipher, SignalProtocolAddress } from '@privacyresearch/libsignal-protocol-typescript'
 import { sendSignalProtocolMessage } from './api'
+import { ProcessedChatMessage } from './types'
 
 export async function processPreKeyMessage(address: string, message: MessageType): Promise<void> {
     console.log('processPreKeyMessage')

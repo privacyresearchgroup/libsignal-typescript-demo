@@ -30,6 +30,7 @@ export async function startSession(recipient: string): Promise<void> {
         remoteUsername: recipient,
         messages: [],
     }
+    console.log(`Starting session with ${recipient}`, {ciphertext})
     const sessionList = [...sessionListSubject.value]
     sessionList.unshift(newSession)
     sessionListSubject.next(sessionList)

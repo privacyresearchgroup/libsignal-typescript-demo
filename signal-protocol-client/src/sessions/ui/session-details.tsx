@@ -1,6 +1,6 @@
-import { useObservable } from '@app/state'
-import useStyles from '@app/styles'
+import { useObservable } from '@app/hooks'
 import React from 'react'
+
 import ComposeMessage from '@app/messages/ui/compose-message'
 import MessageList from '@app/messages/ui/message-list'
 import { currentSessionSubject } from '../state'
@@ -10,7 +10,6 @@ export default function SessionDetails(): JSX.Element {
     const session = useObservable(currentSessionSubject, null)
     const username = useObservable(usernameSubject, '')
 
-    const classes = useStyles()
     console.log({ session })
 
     const clearCurrentSession = () => {
@@ -19,11 +18,11 @@ export default function SessionDetails(): JSX.Element {
 
     return (
         (session && (
-            <div className={classes.container}>
+            <div className="container">
                 <h1>
                     Chat: {username} - {session.remoteUsername}
                 </h1>
-                <button onClick={clearCurrentSession} color="inherit" aria-label="add" className={classes.buttonitem}>
+                <button onClick={clearCurrentSession} color="inherit" aria-label="add" className="buttonitem">
                     (Back)
                 </button>
                 <MessageList messages={session.messages} remoteUserName={session.remoteUsername} />
@@ -34,7 +33,7 @@ export default function SessionDetails(): JSX.Element {
         )) || (
             <div>
                 <h1>No active session</h1>
-                <button onClick={clearCurrentSession} color="inherit" aria-label="add" className={classes.buttonitem}>
+                <button onClick={clearCurrentSession} color="inherit" aria-label="add" className="buttonitem">
                     (Back)
                 </button>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react'
+import { ProcessedChatMessage } from '../types'
 
-import { ProcessedChatMessage } from '@app/types'
 import MessageView from './message-view'
 
 export interface MessageListProps {

@@ -1,4 +1,5 @@
-import { NetworkParams } from '@app/types/network'
+
 import { BehaviorSubject } from 'rxjs'
+import { NetworkParams } from './types'
 
 export const networkInfoSubject = new BehaviorSubject<NetworkParams | null>(null)

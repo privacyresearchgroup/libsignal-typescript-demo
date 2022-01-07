@@ -22,3 +22,9 @@ export interface RequestRecentWebsocketMessage extends WebSocketMessage {
 export function isSendWebSocketMessage(wsm: WebSocketMessage): wsm is SendWebSocketMessage {
     return wsm.action === 'sendMessage' && 'message' in wsm
 }
+
+export interface NetworkParams {
+    apiURL: string
+    wssURI: string
+    apiKey: string
+}

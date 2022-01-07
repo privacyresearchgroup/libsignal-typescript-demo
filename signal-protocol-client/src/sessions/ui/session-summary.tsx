@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
 
-import { ChatSession } from '@app/types'
 import TimeAgo from 'javascript-time-ago'
 
 import en from 'javascript-time-ago/locale/en.json'
 import { currentSessionSubject, sessionForRemoteUser } from '../state'
+import { ChatSession } from '../types'
 
 console.log('add locale', { en })
 TimeAgo.addLocale(en)
