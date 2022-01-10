@@ -12,7 +12,7 @@ export default function SessionList(): JSX.Element {
 
     return (
         <div className="container">
-            <h1>Chat Sessions ({username})</h1>
+            <h2>Chat Sessions ({username})</h2>
 
             <ul>
                 {sessionList.map((session) => (

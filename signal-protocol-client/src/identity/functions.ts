@@ -2,7 +2,7 @@ import { initializeSignalWebsocket } from '@app/messages/api'
 import { networkInfoSubject } from '@app/network/state'
 import { subscribeWebsocket } from '@app/network/websocket'
 import { KeyHelper, PreKeyType, SignedPublicPreKeyType } from '@privacyresearch/libsignal-protocol-typescript'
-import { SignalDirectory } from './signal-directory'
+import { SignalDirectory } from '../signal/signal-directory'
 import { directorySubject, signalStore, usernameSubject } from './state'
 
 export async function createIdentity(username: string, url: string, wss: string, apiKey: string): Promise<void> {

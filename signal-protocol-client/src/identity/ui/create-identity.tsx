@@ -6,7 +6,7 @@ export default function CreateIdentity(): JSX.Element {
     const [username, setUsername] = useState('')
     const [url, setUrl] = useState('https://x94jzhh4el.execute-api.us-west-2.amazonaws.com/temp')
     const [wss, setWss] = useState('wss://56f7nk7zkg.execute-api.us-west-2.amazonaws.com/temp')
-    const [apiKey, setApiKey] = useState('y3Qugm4ahC19oBjKObTYO2oSDNB5jcAE1QrzFRzz')
+    const [apiKey, setApiKey] = useState('')
 
     const createID = async () => {
         await createIdentity(username, url, wss, apiKey)

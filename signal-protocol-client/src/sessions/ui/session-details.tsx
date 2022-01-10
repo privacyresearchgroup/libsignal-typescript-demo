@@ -19,9 +19,9 @@ export default function SessionDetails(): JSX.Element {
     return (
         (session && (
             <div className="container">
-                <h1>
+                <h2>
                     Chat: {username} - {session.remoteUsername}
-                </h1>
+                </h2>
                 <button onClick={clearCurrentSession} color="inherit" aria-label="add" className="buttonitem">
                     (Back)
                 </button>

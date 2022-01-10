@@ -8,11 +8,12 @@ export default function AddSession(): JSX.Element {
     const createSession = () => {
         startSession(remoteUsername)
         currentSessionSubject.next(sessionForRemoteUser(remoteUsername) || null)
+        setRemoteUsername('')
     }
 
     return (
         <div>
-            <h2 id="add-session-title">Create a new chat session</h2>
+            <h4 id="add-session-title">Create a new chat session</h4>
             <p id="add-session-description">Look up a user by username and start and end-to-end-encrypted chat</p>
             <input
                 className="inputitem"
