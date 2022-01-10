@@ -1,9 +1,10 @@
 .App {
   text-align: left;
+  margin-left: 10px;
 }
 .container {
-  padding: 2;
-  margin-left: 20;
+  padding: 2px;
+  margin-left: 20px;
 }
 
 .buttonitem {
