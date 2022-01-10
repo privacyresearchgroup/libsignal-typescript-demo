@@ -11,22 +11,28 @@ import { ProcessedChatMessage } from './types'
 export async function processPreKeyMessage(address: string, message: MessageType): Promise<void> {
     console.log('processPreKeyMessage')
     const cipher = new SessionCipher(signalStore, new SignalProtocolAddress(address, 1))
-    await cipher.decryptPreKeyWhisperMessage(message.body!, 'binary')
+    const plaintextBytes = await cipher.decryptPreKeyWhisperMessage(message.body!, 'binary')
 
-    if (sessionForRemoteUser(address)) {
-        // we already have a session. we do not need this prekey message but can receive it anyway.
-        // This happens when both users try to start a session before processing the prekey message from the other.
-        // In this application we aren't putting text in the prekey messages, so it doesn't matter, but if we
-        // changed that we'd still need to process the message.
-        return
-    }
-    const newSession: ChatSession = {
+    const session : ChatSession= sessionForRemoteUser(address) || {
         remoteUsername: address,
         messages: [],
     }
+    
+
     const sessionList = [...sessionListSubject.value]
-    sessionList.unshift(newSession)
+    sessionList.unshift(session)
     sessionListSubject.next(sessionList)
+
+
+    let cm: ProcessedChatMessage | null = null
+    try{
+        const plaintext = new TextDecoder().decode(new Uint8Array(plaintextBytes))
+        cm = JSON.parse(plaintext) as ProcessedChatMessage
+
+        addMessageToSession(address, cm)
+    } catch (e) {
+        console.log('PreKey message does not contain JSON')
+    }
 }
 
 export async function processRegularMessage(address: string, message: MessageType): Promise<void> {
