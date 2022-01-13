@@ -1,0 +1,29 @@
+.App {
+  text-align: left;
+  margin-left: 10px;
+}
+.container {
+  padding: 2px;
+  margin-left: 20px;
+}
+
+.buttonitem {
+  margin: 10px;
+  padding: 5px;
+}
+
+.inputset {
+  text-align: left;
+  padding: 10px;
+  margin: 10px;
+}
+
+.inputitem {
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.label {
+  margin-right: 10px;
+}
