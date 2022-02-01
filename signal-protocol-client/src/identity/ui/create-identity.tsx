@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import { createIdentity } from '../functions'
 
@@ -8,10 +8,26 @@ export default function CreateIdentity(): JSX.Element {
     const [wss, setWss] = useState('wss://56f7nk7zkg.execute-api.us-west-2.amazonaws.com/temp')
     const [apiKey, setApiKey] = useState('')
 
+    const unameRef = useRef<HTMLInputElement | null>(null)
+    const apiRef = useRef<HTMLInputElement | null>(null)
+    const wssRef = useRef<HTMLInputElement | null>(null)
+    const apiKeyRef = useRef<HTMLInputElement | null>(null)
+    const submitRef = useRef<HTMLButtonElement | null>(null)
+
+    useEffect(() => {
+        unameRef.current?.focus()
+    }, [])
+
     const createID = async () => {
         await createIdentity(username, url, wss, apiKey)
     }
 
+    const nextOnTab = (nextRef: React.MutableRefObject<HTMLInputElement | HTMLButtonElement | null>) => (e : React.KeyboardEvent) => {
+        if(e.key === 'Tab') {
+            e.preventDefault()
+            nextRef.current?.focus()
+        }
+    }
     return (
         <div className="inputset">
             <div className="inputitem">
@@ -19,6 +35,8 @@ export default function CreateIdentity(): JSX.Element {
                     Username:
                 </label>
                 <input
+                    ref={unameRef}
+                    onKeyDown={nextOnTab(apiRef)}
                     type="text"
                     name="username"
                     id="username"
@@ -33,6 +51,8 @@ export default function CreateIdentity(): JSX.Element {
                     REST API URL:
                 </label>
                 <input
+                    ref={apiRef}
+                    onKeyDown={nextOnTab(wssRef)}
                     type="text"
                     name="url"
                     id="url"
@@ -47,6 +67,8 @@ export default function CreateIdentity(): JSX.Element {
                     Websocket URI:
                 </label>
                 <input
+                    ref={wssRef}
+                    onKeyDown={nextOnTab(apiKeyRef)}
                     type="text"
                     name="wss"
                     id="wss"
@@ -61,6 +83,8 @@ export default function CreateIdentity(): JSX.Element {
                     API Key:
                 </label>
                 <input
+                    ref={apiKeyRef}
+                    onKeyDown={nextOnTab(submitRef)}
                     type="text"
                     name="apikey"
                     id="apikey"
@@ -71,7 +95,8 @@ export default function CreateIdentity(): JSX.Element {
                 />
             </div>
             <div>
-                <button onClick={createID} className="buttonitem">
+                <button ref={submitRef}
+                    onKeyDown={nextOnTab(unameRef)} onClick={createID} className="buttonitem">
                     Create Identity
                 </button>
             </div>
