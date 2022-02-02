@@ -1,12 +1,18 @@
+import { useObservable } from '@app/hooks'
+import { wssErrorSubject } from '@app/messages/api'
+import { restAPIErrorSubject } from '@app/signal/signal-directory'
 import React, { useState, useRef, useEffect } from 'react'
 
 import { createIdentity } from '../functions'
 
 export default function CreateIdentity(): JSX.Element {
     const [username, setUsername] = useState('')
-    const [url, setUrl] = useState('https://x94jzhh4el.execute-api.us-west-2.amazonaws.com/temp')
-    const [wss, setWss] = useState('wss://56f7nk7zkg.execute-api.us-west-2.amazonaws.com/temp')
+    const [url, setUrl] = useState('') // e.g. 'https://x94jzhh4el.execute-api.us-west-2.amazonaws.com/temp'
+    const [wss, setWss] = useState('') // e.g. 'wss://56f7nk7zkg.execute-api.us-west-2.amazonaws.com/temp'
     const [apiKey, setApiKey] = useState('')
+
+    const wssError = useObservable(wssErrorSubject, '')
+    const restAPIError = useObservable(restAPIErrorSubject, '')
 
     const unameRef = useRef<HTMLInputElement | null>(null)
     const apiRef = useRef<HTMLInputElement | null>(null)
@@ -22,12 +28,13 @@ export default function CreateIdentity(): JSX.Element {
         await createIdentity(username, url, wss, apiKey)
     }
 
-    const nextOnTab = (nextRef: React.MutableRefObject<HTMLInputElement | HTMLButtonElement | null>) => (e : React.KeyboardEvent) => {
-        if(e.key === 'Tab') {
-            e.preventDefault()
-            nextRef.current?.focus()
+    const nextOnTab =
+        (nextRef: React.MutableRefObject<HTMLInputElement | HTMLButtonElement | null>) => (e: React.KeyboardEvent) => {
+            if (e.key === 'Tab') {
+                e.preventDefault()
+                nextRef.current?.focus()
+            }
         }
-    }
     return (
         <div className="inputset">
             <div className="inputitem">
@@ -46,7 +53,7 @@ export default function CreateIdentity(): JSX.Element {
                     }}
                 />
             </div>
-            <div className="inputitem">
+            <div className={restAPIError ? 'inputitem, error' : 'inputitem'}>
                 <label htmlFor="url" className="label">
                     REST API URL:
                 </label>
@@ -61,8 +68,9 @@ export default function CreateIdentity(): JSX.Element {
                         setUrl(event.target.value)
                     }}
                 />
+                {restAPIError && <span className="errormessage">{restAPIError}</span>}
             </div>
-            <div className="inputitem">
+            <div className={wssError ? 'inputitem, error' : 'inputitem'}>
                 <label htmlFor="wss" className="label">
                     Websocket URI:
                 </label>
@@ -77,8 +85,9 @@ export default function CreateIdentity(): JSX.Element {
                         setWss(event.target.value)
                     }}
                 />
+                {wssError && <span className="errormessage">{wssError}</span>}
             </div>
-            <div className="inputitem">
+            <div className={restAPIError ? 'inputitem, error' : 'inputitem'}>
                 <label htmlFor="apikey" className="label">
                     API Key:
                 </label>
@@ -93,10 +102,10 @@ export default function CreateIdentity(): JSX.Element {
                         setApiKey(event.target.value)
                     }}
                 />
+                {restAPIError && <span className="errormessage">{restAPIError}</span>}
             </div>
             <div>
-                <button ref={submitRef}
-                    onKeyDown={nextOnTab(unameRef)} onClick={createID} className="buttonitem">
+                <button ref={submitRef} onKeyDown={nextOnTab(unameRef)} onClick={createID} className="buttonitem">
                     Create Identity
                 </button>
             </div>
