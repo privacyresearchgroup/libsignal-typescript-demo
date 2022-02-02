@@ -8,8 +8,6 @@ import { directorySubject, signalStore, usernameSubject } from './state'
 export async function createIdentity(username: string, url: string, wss: string, apiKey: string): Promise<void> {
     const directory = new SignalDirectory(url, apiKey)
     directorySubject.next(directory)
-    usernameSubject.next(username)
-    networkInfoSubject.next({ apiURL: url, apiKey, wssURI: wss })
 
     initializeSignalWebsocket(wss)
     subscribeWebsocket(username)
@@ -48,4 +46,7 @@ export async function createIdentity(username: string, url: string, wss: string,
         signedPreKey: publicSignedPreKey,
         oneTimePreKeys: [publicPreKey],
     })
+
+    usernameSubject.next(username)
+    networkInfoSubject.next({ apiURL: url, apiKey, wssURI: wss })
 }
