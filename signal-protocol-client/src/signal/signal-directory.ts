@@ -46,12 +46,12 @@ export class SignalDirectory {
 
     async storeKeyBundle(address: string, bundle: FullDirectoryEntry): Promise<void> {
         try {
-        const res = await fetch(`${this._url}/keys/${address}`, {
-            method: 'PUT',
-            headers: { 'x-api-key': this._apiKey },
-            body: JSON.stringify(serializeKeyRegistrationBundle(bundle)),
-        })
-        await res.json()
+            const res = await fetch(`${this._url}/keys/${address}`, {
+                method: 'PUT',
+                headers: { 'x-api-key': this._apiKey },
+                body: JSON.stringify(serializeKeyRegistrationBundle(bundle)),
+            })
+            await res.json()
         } catch (e) {
             console.error('Error storing key bundle.', { e })
             restAPIErrorSubject.next(`Error connecting to API at ${this._url}. Are the URL and API Key correct?`)
@@ -60,13 +60,13 @@ export class SignalDirectory {
 
     async getPreKeyBundle(address: string): Promise<DeviceType | undefined> {
         try {
-        const res = await fetch(`${this._url}/keys/${address}`, { headers: { 'x-api-key': this._apiKey } })
-        const bundle = await res.json()
-        if (!bundle) {
-            return undefined
-        }
-        const { identityKey, signedPreKey, registrationId, preKey } = bundle
-        return deserializeKeyBundle({ identityKey, signedPreKey, preKey, registrationId })
+            const res = await fetch(`${this._url}/keys/${address}`, { headers: { 'x-api-key': this._apiKey } })
+            const bundle = await res.json()
+            if (!bundle) {
+                return undefined
+            }
+            const { identityKey, signedPreKey, registrationId, preKey } = bundle
+            return deserializeKeyBundle({ identityKey, signedPreKey, preKey, registrationId })
         } catch (e) {
             console.error('Error retrieving key bundle.', { e })
             restAPIErrorSubject.next(
