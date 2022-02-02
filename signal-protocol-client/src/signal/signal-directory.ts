@@ -1,6 +1,8 @@
 import { SignedPublicPreKeyType, DeviceType, PreKeyType } from '@privacyresearch/libsignal-protocol-typescript'
 import * as base64 from 'base64-js'
+import { BehaviorSubject } from 'rxjs'
 
+export const restAPIErrorSubject = new BehaviorSubject<string>('')
 export interface PublicDirectoryEntry {
     identityKey: ArrayBuffer
     signedPreKey: SignedPublicPreKeyType
@@ -43,15 +45,21 @@ export class SignalDirectory {
     constructor(private _url: string, private _apiKey: string) {}
 
     async storeKeyBundle(address: string, bundle: FullDirectoryEntry): Promise<void> {
+        try {
         const res = await fetch(`${this._url}/keys/${address}`, {
             method: 'PUT',
             headers: { 'x-api-key': this._apiKey },
             body: JSON.stringify(serializeKeyRegistrationBundle(bundle)),
         })
         await res.json()
+        } catch (e) {
+            console.error('Error storing key bundle.', { e })
+            restAPIErrorSubject.next(`Error connecting to API at ${this._url}. Are the URL and API Key correct?`)
+        }
     }
 
     async getPreKeyBundle(address: string): Promise<DeviceType | undefined> {
+        try {
         const res = await fetch(`${this._url}/keys/${address}`, { headers: { 'x-api-key': this._apiKey } })
         const bundle = await res.json()
         if (!bundle) {
@@ -59,6 +67,12 @@ export class SignalDirectory {
         }
         const { identityKey, signedPreKey, registrationId, preKey } = bundle
         return deserializeKeyBundle({ identityKey, signedPreKey, preKey, registrationId })
+        } catch (e) {
+            console.error('Error retrieving key bundle.', { e })
+            restAPIErrorSubject.next(
+                `Error retrieving key bundle from API at ${this._url}. See console output for details.`
+            )
+        }
     }
 
     get url(): string {

@@ -1,10 +1,12 @@
 import { MessageType } from '@privacyresearch/libsignal-protocol-typescript'
-import { Subscription } from 'rxjs'
+import { BehaviorSubject, Subscription } from 'rxjs'
 import { webSocket } from 'rxjs/webSocket'
 import { setSignalWebsocket, setWebsocketSubscription, signalWebsocket } from '@app/network/websocket'
 
 import { processPreKeyMessage, processRegularMessage } from '@app/messages/functions'
 import { isSendWebSocketMessage, SendWebSocketMessage, WebSocketMessage } from '@app/network/types'
+
+export const wssErrorSubject = new BehaviorSubject<string>('')
 
 export function sendSignalProtocolMessage(to: string, from: string, message: MessageType): void {
     const wsm: SendWebSocketMessage = {
@@ -34,6 +36,9 @@ export function initializeSignalWebsocket(uri: string): Subscription {
         },
         error: (err) => {
             console.error(err)
+            wssErrorSubject.next(
+                `Error connecting to websocket at ${uri}. Check the URI to ensure it is valid. See console output for details.`
+            )
         },
         complete: () => {
             console.log(`signal websocket complete`)
