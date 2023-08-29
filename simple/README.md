@@ -9,7 +9,6 @@ Play with it online [here](https://signal-demo.privacyresearch.io/).
 
 ## License
 
-
 This project is licensed under [GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
-Copyright 2022 - Privacy Research, LLC
+Copyright 2023 - Privacy Research, LLC

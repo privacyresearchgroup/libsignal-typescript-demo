@@ -40,7 +40,10 @@ interface SerializedFullDirectoryEntry {
 }
 
 export class SignalDirectory {
-    constructor(private _url: string, private _apiKey: string) {}
+    constructor(
+        private _url: string,
+        private _apiKey: string
+    ) {}
 
     async storeKeyBundle(address: string, bundle: FullDirectoryEntry): Promise<void> {
         const res = await fetch(`${this._url}/keys/${address}`, {

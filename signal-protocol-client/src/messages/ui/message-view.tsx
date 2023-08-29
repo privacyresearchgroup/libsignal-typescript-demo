@@ -1,7 +1,6 @@
 import React from 'react'
 import { ProcessedChatMessage } from '../types'
 
-
 export interface MessageViewProps {
     message: ProcessedChatMessage
     incoming: boolean
