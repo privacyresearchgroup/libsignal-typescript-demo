@@ -13,19 +13,17 @@ export async function processPreKeyMessage(address: string, message: MessageType
     const cipher = new SessionCipher(signalStore, new SignalProtocolAddress(address, 1))
     const plaintextBytes = await cipher.decryptPreKeyWhisperMessage(message.body!, 'binary')
 
-    const session : ChatSession= sessionForRemoteUser(address) || {
+    const session: ChatSession = sessionForRemoteUser(address) || {
         remoteUsername: address,
         messages: [],
     }
-    
 
     const sessionList = [...sessionListSubject.value]
     sessionList.unshift(session)
     sessionListSubject.next(sessionList)
 
-
     let cm: ProcessedChatMessage | null = null
-    try{
+    try {
         const plaintext = new TextDecoder().decode(new Uint8Array(plaintextBytes))
         cm = JSON.parse(plaintext) as ProcessedChatMessage
 
