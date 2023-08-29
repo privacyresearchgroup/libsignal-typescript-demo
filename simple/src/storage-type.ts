@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {  StorageType, Direction, SessionRecordType, SignalProtocolAddress, PreKeyPairType, SignedPreKeyPairType } from '@privacyresearch/libsignal-protocol-typescript'
+import {
+    StorageType,
+    Direction,
+    SessionRecordType,
+    SignalProtocolAddress,
+    PreKeyPairType,
+    SignedPreKeyPairType,
+} from '@privacyresearch/libsignal-protocol-typescript'
 
 // Type guards
 export function isKeyPairType(kp: any): kp is KeyPairType {
@@ -89,9 +96,7 @@ export class SignalProtocolStore implements StorageType {
         if (trusted === undefined) {
             return Promise.resolve(true)
         }
-        return Promise.resolve(
-            arrayBufferToString(identityKey) === arrayBufferToString(trusted as ArrayBuffer)
-        )
+        return Promise.resolve(arrayBufferToString(identityKey) === arrayBufferToString(trusted as ArrayBuffer))
     }
     async loadPreKey(keyId: string | number): Promise<KeyPairType | undefined> {
         let res = this.get('25519KeypreKey' + keyId, undefined)
