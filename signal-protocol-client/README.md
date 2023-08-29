@@ -84,21 +84,20 @@ Make sure you have [`pnpm`](https://pnpm.io/installation) installed on your mach
   git clone git@github.com:privacyresearchgroup/libsignal-typescript-demo.git
   ```
 
-1. Open the newly created directory:
+2. Open the newly created directory:
 
   ```sh
   cd libsignal-typescript-demo/signal-protocol-client
   pnpm install
   ```
 
-1. Now, you can run the client:
+3. Now, you can run the client:
 
   ```sh
   pnpm run dev
   ```
 
-1. Navigate to [http://localhost:3000](http://localhost:3000) to explore the landing page.
-
+4. Navigate to [http://localhost:3000](http://localhost:3000) to explore the landing page.
 
 ### Deploying a Backend
 
